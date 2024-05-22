@@ -88,20 +88,20 @@ const htmlforEventManager = `<!DOCTYPE html>
         <p>
           Here is the link to the successful event creation:
           <a
-            href="http://localhost:5173/secure/v3/Event-On-Boarding/success/{{id}}"
+            href="https://tesract.vercel.app//secure/v3/Event-On-Boarding/success/{{id}}"
             >Successful Event Creation</a
           >
         </p>
         <p>
           Here is the link to the admin panel:
           <a
-            href="http://localhost:5173/secure/v3/dashboard/en/?par=fjkdjg879sdlghlkajsdf97df/{{id}}"
+            href="https://tesract.vercel.app//secure/v3/dashboard/en/?par=fjkdjg879sdlghlkajsdf97df/{{id}}"
             >Admin Panel</a
           >
         </p>
         <p>
           For the event page, please visit:
-          <a href="http://localhost:5173/event/{{id}}">Event Page</a>
+          <a href="https://tesract.vercel.app//event/{{id}}">Event Page</a>
         </p>
         <p>
           If you need help, please contact us at +91 9030684781 or email us at
