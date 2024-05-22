@@ -72,12 +72,10 @@ const htmlforEventManager = `<!DOCTYPE html>
           the Tesseract servers. Please review the details below:
         </p>
         <ul>
-          <li><strong>Event Name:</strong> {{eventName}}</li>
-          <li><strong>Hosted By:</strong> {{eventHostedBy}}</li>
-          <li><strong>Event Manager's Email:</strong> {{eventManagerMail}}</li>
-          <li><strong>Payment Details:</strong> {{eventPaymentDetails}}</li>
-          <li><strong>Admin Panel Password:</strong> {{eventAdminPassword}}</li>
-          <li><strong>Event Date:</strong> {{eventDate}}</li>
+          <li><strong>Payment Details:</strong>{{eventPaymentDetails}} (To change the payemtn details reach the helpdesk) </li>
+          <li><strong>Admin Pannel Username</strong>Admin</li>
+          <li><strong>Admin Panel Password:</strong>{{eventAdminPassword}}</li> (This is a secure password, please do not share with anyone)
+          <li><strong>Last Date to access Admin Pannel:</strong> {{eventDate}}</li>
         </ul>
         <p>
           Please ensure that all the details are correct. If you need to make

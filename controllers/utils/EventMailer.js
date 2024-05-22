@@ -24,7 +24,7 @@ class EventMailer {
       const formattedPlaceholder = htmlforEventManager
         .replace("{{eventName}}", this.name)
         .replace("{{eventHostedBy}}", this.hostedBy)
-        .replace("{{eventPaymentUpi}}", this.upi)
+        .replace("{{eventPaymentDetails}}", this.upi)
         .replace("{{eventAdminPassword}}", this.password)
         .replace("{{eventDate}}", this.date)
         .replace("{{id}}", this.id);
