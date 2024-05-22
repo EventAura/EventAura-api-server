@@ -17,6 +17,7 @@ const EventPostController = async (req, res) => {
       eventPaymentUpi,
       eventHostedBy,
       eventSpeaker,
+      eventPrice,
     } = req.body;
     const response = await EventModel.create({
       eventName,
@@ -31,6 +32,7 @@ const EventPostController = async (req, res) => {
       eventPaymentUpi,
       eventHostedBy,
       eventSpeaker,
+      eventPrice,
     });
     const eventMailer = new EventMailer(
       response._id,
