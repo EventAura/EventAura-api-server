@@ -1,4 +1,5 @@
 import EventModel from "../models/EventModel.js";
+import EventMailer from "./utils/EventMailer.js";
 
 // Events Post Controller
 const EventPostController = async (req, res) => {
@@ -31,6 +32,16 @@ const EventPostController = async (req, res) => {
       eventHostedBy,
       eventSpeaker,
     });
+    const eventMailer = new EventMailer(
+      response._id,
+      eventName,
+      eventManagerMail,
+      eventHostedBy,
+      eventPaymentUpi,
+      eventAdminPassword,
+      eventDate
+    );
+    await eventMailer.sendEmail();
     res.status(201).json({ message: true, data: response });
   } catch (error) {
     res.status(500).json({ message: false });
