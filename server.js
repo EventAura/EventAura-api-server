@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import cron from "node-cron";
+import http from "http";
 import ConnectDb from "./utils/ConnectDb.js";
 import eventRouter from "./routes/EventRouter.js";
 // env file configuration
@@ -24,6 +26,36 @@ app.get("/", (req, res) => {
 
 // Event Router
 app.use("/", eventRouter);
+
+// Ping server function
+const pingServer = () => {
+  return new Promise((resolve, reject) => {
+    http
+      .get(`http://localhost:8080`, (res) => {
+        let data = "";
+        res.on("data", (chunk) => {
+          data += chunk;
+        });
+        res.on("end", () => {
+          resolve(data);
+        });
+      })
+      .on("error", (err) => {
+        reject(err);
+      });
+  });
+};
+
+// Cron Job to ping the server every 30min...
+cron.schedule("*/30 * * * *", async () => {
+  try {
+    console.log("Pinging server...");
+    const response = await pingServer();
+    console.log("Ping successful:", response);
+  } catch (error) {
+    console.error("Ping failed:", error.message);
+  }
+});
 
 // server
 app.listen(process.env.PORT, () => {
