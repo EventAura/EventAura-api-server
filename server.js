@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cron from "node-cron";
-import http from "http";
+import https from "https";
 import ConnectDb from "./utils/ConnectDb.js";
 import eventRouter from "./routes/EventRouter.js";
 // env file configuration
@@ -30,7 +30,7 @@ app.use("/", eventRouter);
 // Ping server function
 const pingServer = () => {
   return new Promise((resolve, reject) => {
-    http
+    https
       .get(`https://tesract-server.onrender.com`, (res) => {
         let data = "";
         res.on("data", (chunk) => {
