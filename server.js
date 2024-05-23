@@ -31,7 +31,7 @@ app.use("/", eventRouter);
 const pingServer = () => {
   return new Promise((resolve, reject) => {
     http
-      .get(`http://localhost:8080`, (res) => {
+      .get(`https://tesract-server.onrender.com`, (res) => {
         let data = "";
         res.on("data", (chunk) => {
           data += chunk;
@@ -47,7 +47,7 @@ const pingServer = () => {
 };
 
 // Cron Job to ping the server every 30min...
-cron.schedule("*/30 * * * *", async () => {
+cron.schedule("*/15 * * * *", async () => {
   try {
     console.log("Pinging server...");
     const response = await pingServer();

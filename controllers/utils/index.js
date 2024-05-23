@@ -62,14 +62,14 @@ const htmlforEventManager = `<!DOCTYPE html>
   <body>
     <div class="container">
       <div class="banner">
-        <h1>Tesseract</h1>
+        <h1>Teseract</h1>
       </div>
       <div class="content">
         <p>Dear Event Manager,</p>
         <p>
           Your event, <strong>{{eventName}}</strong>, hosted by
           <strong>{{eventHostedBy}}</strong>, has been successfully created on
-          the Tesseract servers. Please review the details below:
+          the Teseract servers. Please review the details below:
         </p>
         <ul>
           <li><strong>Payment Details:</strong>{{eventPaymentDetails}} (To change the payemtn details reach the helpdesk) </li>
