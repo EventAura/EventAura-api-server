@@ -47,7 +47,7 @@ const pingServer = () => {
 };
 
 // Cron Job to ping the server every 30min...
-cron.schedule("*/15 * * * *", async () => {
+cron.schedule("*/20 * * * *", async () => {
   try {
     console.log("Pinging server...");
     const response = await pingServer();
