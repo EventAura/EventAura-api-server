@@ -101,7 +101,7 @@ const htmlforEventManager = `<!DOCTYPE html>
         </p>
         <p>
           For the event page, please visit:
-          <a href="https://tesract.vercel.app//event/{{id}}">Event Page</a>
+          <a href="https://tesract.vercel.app/event/{{id}}">Event Page</a>
         </p>
         <p>
           If you need help, please contact us at +91 9030684781 or email us at
