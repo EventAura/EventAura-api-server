@@ -61,6 +61,10 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  eventMailDescription:{
+    type: String,
+    required: true,
+  }
 });
 
 const EventModel = mongoose.model("Events", EventSchema);
