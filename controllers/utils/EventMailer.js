@@ -27,7 +27,9 @@ class EventMailer {
         .replace("{{eventPaymentDetails}}", this.upi)
         .replace("{{eventAdminPassword}}", this.password)
         .replace("{{eventDate}}", this.date)
-        .replace("{{id}}", this.id);
+        .replace("{{id}}", this.id)
+        .replace("{{Adminid}}", this.id)
+        .replace("{{Eventid}}", this.id);
 
       let mailOptions = {
         from: process.env.EMAIL,

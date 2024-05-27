@@ -95,13 +95,13 @@ const htmlforEventManager = `<!DOCTYPE html>
         <p>
           Here is the link to the admin panel:
           <a
-            href="https://tesract.vercel.app//secure/v3/dashboard/en/?par=fjkdjg879sdlghlkajsdf97df/{{id}}"
+            href="https://tesract.vercel.app//secure/v3/dashboard/en/?par=fjkdjg879sdlghlkajsdf97df/{{Adminid}}"
             >Admin Panel</a
           >
         </p>
         <p>
           For the event page, please visit:
-          <a href="https://tesract.vercel.app/event/{{id}}">Event Page</a>
+          <a href="https://tesract.vercel.app/event/{{Eventid}}">Event Page</a>
         </p>
         <p>
           If you need help, please contact us at +91 9030684781 or email us at
