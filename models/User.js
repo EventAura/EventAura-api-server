@@ -43,12 +43,17 @@ const UserSchema = new mongoose.Schema({
   qrCode: {
     type: String,
     default: null,
-    trim: true,
   },
   userEntryStatus: {
     type: String,
     default: false,
   },
+  transactionId: {
+    type: String,
+    default: null,
+  },
 });
 
 const User = mongoose.model("Participants", UserSchema);
+
+export default User;

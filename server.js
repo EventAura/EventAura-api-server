@@ -6,6 +6,7 @@ import cron from "node-cron";
 import https from "https";
 import ConnectDb from "./utils/ConnectDb.js";
 import eventRouter from "./routes/EventRouter.js";
+import FreeEventRouter from "./routes/FreeEventRoute.js";
 // env file configuration
 dotenv.config({ path: "./utils/.env" });
 
@@ -26,6 +27,9 @@ app.get("/", (req, res) => {
 
 // Event Router
 app.use("/", eventRouter);
+
+// Free Event Route
+app.use("/", FreeEventRouter);
 
 // Ping server function
 const pingServer = () => {
