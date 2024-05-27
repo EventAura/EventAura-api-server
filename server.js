@@ -7,6 +7,7 @@ import https from "https";
 import ConnectDb from "./utils/ConnectDb.js";
 import eventRouter from "./routes/EventRouter.js";
 import FreeEventRouter from "./routes/FreeEventRoute.js";
+import ParticipantRouter from "./routes/ParticipantRoute.js";
 // env file configuration
 dotenv.config({ path: "./utils/.env" });
 
@@ -30,6 +31,9 @@ app.use("/", eventRouter);
 
 // Free Event Route
 app.use("/", FreeEventRouter);
+
+// Participant Router
+app.use("/", ParticipantRouter);
 
 // Ping server function
 const pingServer = () => {
