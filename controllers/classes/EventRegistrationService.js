@@ -20,7 +20,7 @@ class EventRegistrationService {
     try {
       const qrCodeData = await QRCode.toDataURL(this.user._id.toString());
       await User.findByIdAndUpdate(this.user._id, { qrCode: qrCodeData });
-      this.user.qrCode = qrCodeData; // Ensure QR code is included in user object for PDF generation
+      this.user.qrCode = qrCodeData;
     } catch (error) {
       throw new Error("Failed to generate QR code: " + error.message);
     }
@@ -45,21 +45,106 @@ class EventRegistrationService {
       }
 
       const content = `
-        <html>
-          <body>
-            <h1>Event Registration</h1>
-            <p>Name: ${this.user.name}</p>
-            <p>College: ${this.user.college}</p>
-            <p>Phone Number: ${this.user.phoneNumber}</p>
-            <p>Roll Number: ${this.user.rollNumber}</p>
-            <p>Event Name: ${this.user.eventName}</p>
-            <p>Transcation Id: ${transactionIdContent}</p>
-            <p>Event Price: ${priceContent}</p>
-            
-            
-            <img src="${this.user.qrCode}" alt="QR Code" />
-          </body>
-        </html>
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Event Registration PDF</title>
+          <style>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+      
+            body {
+              font-family: "Poppins", sans-serif; /* Use Poppins font */
+              margin: 0;
+              padding: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-height: 100vh;
+              background-color: #f8f8f8;
+            }
+      
+            .container {
+              width: 90%;
+              max-width: 800px;
+              display: flex;
+              border-radius: 10px;
+              overflow: hidden;
+              box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+              background-color: #fff;
+            }
+      
+            .left-column,
+            .right-column {
+              padding: 40px;
+            }
+      
+            .left-column {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            }
+      
+            .right-column {
+              flex: 2;
+              padding-left: 20px;
+              padding-right: 40px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              color: #333;
+            }
+      
+            img {
+              max-width: 100%;
+              border-radius: 10px;
+            }
+      
+            h1 {
+              text-align: center;
+              margin-bottom: 20px;
+              font-size: 24px;
+            }
+      
+            p {
+              margin: 5px 0;
+              line-height: 1.6;
+              font-size: 18px;
+            }
+      
+            .bold {
+              font-weight: bold;
+            }
+      
+            /* Vertical line */
+            .vertical-line {
+              width: 2px;
+              background-color: #ddd;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="left-column">
+              <img src="${this.user.qrCode}" alt="QR Code" />
+            </div>
+            <div class="vertical-line"></div>
+            <div class="right-column">
+              <p><span class="bold">Name:</span> ${this.user.name}</p>
+              <p><span class="bold">College:</span> ${this.user.college}</p>
+              <p><span class="bold">Phone Number:</span> ${this.user.phoneNumber}</p>
+              <p><span class="bold">Roll Number:</span> ${this.user.rollNumber}</p>
+              <p><span class="bold">Event Name:</span> ${this.user.eventName}</p>
+              <p><span class="bold">Transaction Id:</span> ${transactionIdContent}</p>
+              <p><span class="bold">Event Price:</span> ${priceContent}</p>
+            </div>
+          </div>
+        </body>
+      </html>
+      
       `;
       await page.setContent(content);
       const pdfPath = path.join(
@@ -89,12 +174,115 @@ class EventRegistrationService {
         to: this.user.email,
         subject: "Event Registration Confirmation",
         html: `
-          <p>Thank you for registering for the event!</p>
-          ${this.event.eventMailDescription}
-          <p>Event Contact Details:</p>
-          <p>Email: ${this.event.eventManagerMail}</p>
-          <p>Phone: ${this.event.eventManagerPhone}</p>
-          <p>Please find your registration details and QR code in the attached PDF.</p>
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Event Registration Confirmation</title>
+            <style>
+              @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+        
+              body {
+                font-family: "Poppins", sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #1f1f1f;
+                color: #ccc;
+              }
+        
+              .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #333;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+              }
+        
+              .header {
+                text-align: center;
+                margin-bottom: 20px;
+                background-color: rgb(0, 123, 255);
+                padding: 20px;
+                border-radius: 10px 10px 0 0;
+              }
+        
+              .content {
+                padding: 20px;
+              }
+        
+              .footer {
+                padding: 20px;
+                text-align: center;
+                background-color: #444;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+              }
+        
+              p {
+                margin: 10px 0;
+                line-height: 1.6;
+              }
+        
+              h1,
+              h2 {
+                color: #fff;
+              }
+        
+              .footer p {
+                color: #ccc;
+              }
+        
+              a {
+                color: #007bff;
+                text-decoration: none;
+              }
+        
+              a:hover {
+                text-decoration: underline;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1 style="color: #fff">Tesseract</h1>
+              </div>
+              <div class="content">
+                <p>Dear ${this.user.name},</p>
+                <p>
+                  Thank you for participating in the event
+                  <strong>${this.event.eventName}</strong> hosted by
+                  <strong>${this.event.eventHostedBy}</strong> at
+                  <strong>${this.event.eventVenue}</strong>. We're delighted to have you
+                  join us and hope you have a wonderful experience!
+                </p>
+                <p>${this.event.eventMailDescription}</p>
+                <h2>Event Venue</h2>
+                <p>
+                  The event will be held at <strong>${this.event.eventVenue}</strong>.
+                  For more information about the venue, including directions and
+                  facilities, please visit the venue's website:
+                  <a href="${this.event.eventVenueUrl}">${this.event.eventVenueUrl}</a>.
+                </p>
+                <h2>Contact Details</h2>
+                <p><strong>Email:</strong> ${this.event.eventManagerMail}</p>
+                <p><strong>Phone:</strong> ${this.event.eventManagerPhone}</p>
+                <p>
+                  Please find your registration details and QR code in the attached PDF.
+                </p>
+              </div>
+            </div>
+            <div class="footer">
+              <p>
+                &copy; 2024 Tesseract, registered under Veda Solutions. All rights
+                reserved.
+              </p>
+            </div>
+          </body>
+        </html>
+        
         `,
         attachments: [
           {
@@ -105,7 +293,7 @@ class EventRegistrationService {
       };
 
       await transporter.sendMail(mailOptions);
-      // Ensure the PDF is deleted after the email is successfully sent
+
       if (fs.existsSync(this.pdfPath)) {
         fs.unlinkSync(this.pdfPath);
       }
