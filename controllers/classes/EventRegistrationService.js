@@ -53,7 +53,7 @@ class EventRegistrationService {
             <p>Phone Number: ${this.user.phoneNumber}</p>
             <p>Roll Number: ${this.user.rollNumber}</p>
             <p>Event Name: ${this.user.eventName}</p>
-            <p>Transcation Id: ${transactionIdContent}}</p>
+            <p>Transcation Id: ${transactionIdContent}</p>
             <p>Event Price: ${priceContent}</p>
             
             
