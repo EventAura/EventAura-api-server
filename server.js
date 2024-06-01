@@ -64,8 +64,8 @@ cron.schedule("*/15 * * * *", async () => {
     console.error("Ping failed:", error.message);
   }
 });
+const PORT = process.env.PORT || 8080;
 
-// server
-app.listen(process.env.PORT, () => {
-  console.log(`server is runing on port ${process.env.PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
