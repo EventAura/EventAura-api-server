@@ -21,7 +21,6 @@ const FreeEventRegistration = async (req, res) => {
       college,
       eventName: event.eventName,
       eventPrice: event.eventPrice,
-      transactionId,
     });
 
     res.status(201).json({ message: true, id: user._id });
