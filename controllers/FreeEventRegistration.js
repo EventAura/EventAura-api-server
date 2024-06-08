@@ -3,8 +3,7 @@ import EventModel from "../models/EventModel.js";
 import EventRegistrationService from "./classes/EventRegistrationService.js";
 
 const FreeEventRegistration = async (req, res) => {
-  const { name, email, phoneNumber, rollNumber, college, transactionId } =
-    req.body;
+  const { name, email, phoneNumber, rollNumber, college } = req.body;
   const { id } = req.params;
 
   try {
