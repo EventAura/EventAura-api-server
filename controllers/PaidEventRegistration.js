@@ -72,7 +72,7 @@ const PaidEventRegistration = async (req, res) => {
       const redirectUrl =
         response.data.data?.instrumentResponse?.redirectInfo?.url;
       if (redirectUrl) {
-        res.json(response.data);
+        res.send(redirectUrl);
       } else {
         res.status(400).json({ message: "Redirect URL not found in response" });
       }
