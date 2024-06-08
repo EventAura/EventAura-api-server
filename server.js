@@ -8,6 +8,7 @@ import ConnectDb from "./utils/ConnectDb.js";
 import eventRouter from "./routes/EventRouter.js";
 import FreeEventRouter from "./routes/FreeEventRoute.js";
 import ParticipantRouter from "./routes/ParticipantRoute.js";
+import paidEventRouter from "./routes/PaidEventRoute.js";
 // env file configuration
 dotenv.config({ path: "./utils/.env" });
 
@@ -28,6 +29,10 @@ app.get("/", (req, res) => {
 
 // Event Router
 app.use("/", eventRouter);
+
+// Paid event Router
+
+app.use("/api", paidEventRouter);
 
 // Free Event Route
 app.use("/", FreeEventRouter);

@@ -48,7 +48,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: false,
   },
-  transactionId: {
+  paymentData: {
+    type: mongoose.Schema.Types.Mixed,
+    default: null,
+  },
+  merchantTransactionId: {
     type: String,
     default: null,
   },

@@ -35,13 +35,17 @@ class EventRegistrationService {
       const page = await browser.newPage();
 
       let transactionIdContent = "-NA-";
-      if (this.user.transactionId) {
-        transactionIdContent = `<p>Transaction ID: ${this.user.transactionId}</p>`;
+      if (
+        this.user.paymentData &&
+        this.user.paymentData.data &&
+        this.user.paymentData.data.transactionId
+      ) {
+        transactionIdContent = ` ${this.user.paymentData.data.transactionId}`;
       }
 
       let priceContent = "FREE";
       if (this.user.eventPrice && this.user.eventPrice !== "0") {
-        priceContent = `<p>Price: ${this.user.eventPrice}</p>`;
+        priceContent = ` ${this.user.eventPrice}`;
       }
 
       const content = `
