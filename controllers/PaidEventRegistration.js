@@ -40,7 +40,7 @@ const PaidEventRegistration = async (req, res) => {
       merchantUserId: "MUID123",
       name,
       amount: parseInt(amount) * 100,
-      redirectUrl: `http://localhost:8080/api/phone-pay/status/${merchantId}/${merchantTransactionId}/${event._id}`,
+      redirectUrl: `https://tesract-server.onrender.com/api/phone-pay/status/${merchantId}/${merchantTransactionId}/${event._id}`,
       redirectMode: "POST",
       mobileNumber: phoneNumber,
       paymentInstrument: {
@@ -133,7 +133,7 @@ const PaidEventStatus = async (req, res) => {
   } catch (error) {
     if (error.response) {
       res.status(error.response.status).json({
-        message: error.message,
+        message: error,
         data: error.response.data,
       });
     } else {
