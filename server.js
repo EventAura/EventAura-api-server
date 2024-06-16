@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cron from "node-cron";
-import https from "https";
+import axios from "axios";
 import ConnectDb from "./utils/ConnectDb.js";
 import eventRouter from "./routes/EventRouter.js";
 import FreeEventRouter from "./routes/FreeEventRoute.js";
@@ -40,39 +40,11 @@ app.use("/", FreeEventRouter);
 // Participant Router
 app.use("/", ParticipantRouter);
 
-// Ping server function
-const pingServer = () => {
-  return new Promise((resolve, reject) => {
-    https
-      .get("https://tesract-server.onrender.com", (res) => {
-        let data = "";
-
-        res.on("data", (chunk) => {
-          data += chunk;
-        });
-
-        res.on("end", () => {
-          if (res.statusCode === 200) {
-            resolve(data);
-          } else {
-            reject(
-              new Error(`Server responded with status code ${res.statusCode}`)
-            );
-          }
-        });
-      })
-      .on("error", (err) => {
-        reject(new Error(`Request failed: ${err.message}`));
-      });
-  });
-};
-
-// Cron Job to ping the server every 5 minutes
-cron.schedule("*/5 * * * *", async () => {
+cron.schedule("*/10 * * * *", async () => {
   try {
     console.log("Pinging server...");
-    const response = await pingServer();
-    console.log("Ping successful:", response);
+    const response = await axios.get("https://tesract-server.onrender.com");
+    console.log("Ping successful:", response.data);
   } catch (error) {
     console.error("Ping failed:", error.message);
   }
