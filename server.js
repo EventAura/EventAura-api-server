@@ -44,23 +44,31 @@ app.use("/", ParticipantRouter);
 const pingServer = () => {
   return new Promise((resolve, reject) => {
     https
-      .get(`https://tesract-server.onrender.com`, (res) => {
+      .get("https://tesract-server.onrender.com", (res) => {
         let data = "";
+
         res.on("data", (chunk) => {
           data += chunk;
         });
+
         res.on("end", () => {
-          resolve(data);
+          if (res.statusCode === 200) {
+            resolve(data);
+          } else {
+            reject(
+              new Error(`Server responded with status code ${res.statusCode}`)
+            );
+          }
         });
       })
       .on("error", (err) => {
-        reject(err);
+        reject(new Error(`Request failed: ${err.message}`));
       });
   });
 };
 
-// Cron Job to ping the server every 30min...
-cron.schedule("*/15 * * * *", async () => {
+// Cron Job to ping the server every 5 minutes
+cron.schedule("*/5 * * * *", async () => {
   try {
     console.log("Pinging server...");
     const response = await pingServer();
