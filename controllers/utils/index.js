@@ -95,7 +95,7 @@ const htmlforEventManager = `<!DOCTYPE html>
         <p>
           Here is the link to the admin panel:
           <a
-            href="https://tesract.vercel.app//secure/v3/dashboard/en/?par=fjkdjg879sdlghlkajsdf97df/{{Adminid}}"
+            href="https://tesrct-admin-pannel.vercel.app/secure/v3/dasboard/login/{{Adminid}}"
             >Admin Panel</a
           >
         </p>
