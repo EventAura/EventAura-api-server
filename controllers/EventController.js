@@ -1,5 +1,6 @@
 import EventModel from "../models/EventModel.js";
 import EventMailer from "./utils/EventMailer.js";
+import bcrypt from "bcryptjs";
 
 // Events Post Controller
 const EventPostController = async (req, res) => {
@@ -74,4 +75,41 @@ const EventGetSingleController = async (req, res) => {
   }
 };
 
-export { EventPostController, EventGetController, EventGetSingleController };
+const EventLoginController = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { username, password } = req.body;
+
+    if (username !== "admin") {
+      return res
+        .status(401)
+        .json({ message: false, error: "Please Check Your Username" });
+    }
+
+    const event = await EventModel.findById(id);
+    if (!event) {
+      return res.status(404).json({ message: false, error: "Event not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, event.eventAdminPassword);
+
+    if (!isMatch) {
+      return res
+        .status(401)
+        .json({ message: false, error: "Invalid password" });
+    }
+
+    // If the password matches, respond with success
+    res.status(200).json({ message: true });
+  } catch (error) {
+    console.error(`Error during login attempt: ${error.message}`);
+    res.status(500).json({ message: false, error: error.message });
+  }
+};
+
+export {
+  EventPostController,
+  EventGetController,
+  EventGetSingleController,
+  EventLoginController,
+};
