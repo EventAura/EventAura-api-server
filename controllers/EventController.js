@@ -81,22 +81,18 @@ const EventLoginController = async (req, res) => {
     const { username, password } = req.body;
 
     if (username !== "admin") {
-      return res
-        .status(401)
-        .json({ message: false, error: "Please Check Your Username" });
+      return res.json({ message: false, error: "Please Check Your Username" });
     }
 
     const event = await EventModel.findById(id);
     if (!event) {
-      return res.status(404).json({ message: false, error: "Event not found" });
+      return res.json({ message: false, error: "Event not found" });
     }
 
     const isMatch = await bcrypt.compare(password, event.eventAdminPassword);
 
     if (!isMatch) {
-      return res
-        .status(401)
-        .json({ message: false, error: "Invalid password" });
+      return res.json({ message: false, error: "Invalid password" });
     }
 
     // If the password matches, respond with success
