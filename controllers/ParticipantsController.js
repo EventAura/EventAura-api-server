@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import EventModel from "../models/EventModel.js";
 
 const getParticipants = async (req, res) => {
   try {
@@ -18,4 +19,14 @@ const getParticipantById = async (req, res) => {
   }
 };
 
-export { getParticipants, getParticipantById };
+const getParticipantsByEvent = async (req, res) => {
+  try {
+    const eventId = await EventModel.findById(req.params.id);
+    const users = await User.find({ eventName: eventId.eventName });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { getParticipants, getParticipantById, getParticipantsByEvent };
