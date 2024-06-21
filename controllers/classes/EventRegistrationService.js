@@ -269,7 +269,7 @@ class EventRegistrationService {
   <body>
     <div class="container">
       <div class="header">
-        <h1>Tesseract</h1>
+        <h1>EventAura</h1>
       </div>
       <div class="content">
         <p>Dear ${this.user.name},</p>
@@ -297,8 +297,7 @@ class EventRegistrationService {
       </div>
       <div class="footer">
         <p>
-          &copy; 2024 Tesseract, registered under Veda Solutions. All rights
-          reserved.
+          &copy; 2024 EventAura
         </p>
       </div>
     </div>

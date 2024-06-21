@@ -32,7 +32,7 @@ const htmlforEventManager = `<!DOCTYPE html>
         padding: 20px;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
-        text-align: left; /* Align Tesseract to the left */
+        text-align: left; /* Align EventAura to the left */
         margin-bottom: 20px;
       }
 
@@ -111,8 +111,7 @@ const htmlforEventManager = `<!DOCTYPE html>
       </div>
       <div class="footer">
         <p>
-          © 2024 Tesseract, registered under Veda Solutions. All rights
-          reserved.
+          © 2024 EventAura
         </p>
       </div>
     </div>
