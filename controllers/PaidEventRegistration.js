@@ -37,7 +37,7 @@ const PaidEventRegistration = async (req, res) => {
     const data = {
       merchantId,
       merchantTransactionId,
-      merchantUserId: "MUID123",
+      merchantUserId: merchantId,
       name,
       amount: parseInt(amount) * 100,
       redirectUrl: `https://tesract-server.onrender.com/api/phone-pay/status/${merchantId}/${merchantTransactionId}/${event._id}`,
@@ -52,7 +52,7 @@ const PaidEventRegistration = async (req, res) => {
     const string = payloadMain + "/pg/v1/pay" + key;
     const sha256 = crypto.createHash("sha256").update(string).digest("hex");
     const checksum = sha256 + "###" + keyIndex;
-    const URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
+    const URL = "https://api.phonepe.com/apis/hermes/pg/v1/pay";
 
     const options = {
       method: "post",
@@ -81,7 +81,7 @@ const PaidEventRegistration = async (req, res) => {
     }
   } catch (error) {
     console.error("Error in PaidEventRegistration:", error);
-    res.status(500).json({ message: false, error: error.message });
+    res.status(500).json({ message: false, error });
   }
 };
 
