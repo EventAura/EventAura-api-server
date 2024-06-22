@@ -38,7 +38,6 @@ const PaidEventRegistration = async (req, res) => {
       merchantId,
       merchantTransactionId,
       merchantUserId: merchantId,
-      name,
       amount: parseInt(amount) * 100,
       redirectUrl: `https://tesract-server.onrender.com/api/phone-pay/status/${merchantId}/${merchantTransactionId}/${event._id}`,
       redirectMode: "POST",
@@ -93,7 +92,7 @@ const PaidEventStatus = async (req, res) => {
     const string = `/pg/v1/status/${merchantId}/${merchantTransactionId}` + key;
     const sha256 = crypto.createHash("sha256").update(string).digest("hex");
     const checksum = sha256 + "###" + keyIndex;
-    const URL = `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${merchantId}/${merchantTransactionId}`;
+    const URL = `https://api-preprod.phonepe.com/apis/hermes/pg/v1/status/{merchantId}/{merchantTransactionId}`;
 
     const options = {
       method: "get",
