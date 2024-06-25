@@ -85,34 +85,56 @@ const PaidEventRegistration = async (req, res) => {
 };
 
 const PaidEventStatus = async (req, res) => {
-  const { merchantId, merchantTransactionId, eventId } = req.params;
-  const key = process.env.KEY;
-  const keyIndex = process.env.KEY_INDEX || 1;
-  try {
-    const string = `/pg/v1/status/${merchantId}/${merchantTransactionId}` + key;
-    const sha256 = crypto.createHash("sha256").update(string).digest("hex");
-    const checksum = sha256 + "###" + keyIndex;
-    const URL = `https://api-preprod.phonepe.com/apis/hermes/pg/v1/status/{merchantId}/{merchantTransactionId}`;
+  const { merchantTransactionId, eventId } = req.params;
 
+  const key = process.env.KEY; // Production key
+  const keyIndex = process.env.KEY_INDEX || 1; // Production key index
+  const merchantId = process.env.MERCHAND_ID; // Production Merchant ID
+  console.log(merchantTransactionId, eventId, key, keyIndex, merchantId);
+  try {
+    // Construct the string to hash
+    const stringToHash =
+      `/pg/v1/status/${merchantId}/${merchantTransactionId}` + key;
+
+    // Generate the SHA-256 hash
+    const sha256 = crypto
+      .createHash("sha256")
+      .update(stringToHash)
+      .digest("hex");
+
+    // Create the checksum
+    const checksum = sha256 + "###" + keyIndex;
+
+    // Define the URL for the status check
+    const URL = `https://api.phonepe.com/apis/hermes/pg/v1/status/${merchantId}/${merchantTransactionId}`;
+
+    // Configure the request options
     const options = {
       method: "get",
       url: URL,
       headers: {
-        accept: "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json",
         "X-VERIFY": checksum,
+        "X-MERCHANT-ID": merchantId,
       },
     };
 
+    // Make the request
     const response = await axios.request(options);
+
+    // Handle the response
     const user = await User.findOne({ merchantTransactionId });
     const event = await EventModel.findById(eventId);
     if (!user) {
       return res.status(404).json({ message: false, error: "User not found" });
     }
+
     user.paymentData = response.data;
     await user.save();
     res.redirect(`https://tesract.vercel.app/event/${user._id}/success`);
+
+    // Additional processing (optional)
     (async () => {
       try {
         const eventRegistrationService = new EventRegistrationService(
@@ -123,20 +145,17 @@ const PaidEventStatus = async (req, res) => {
         await eventRegistrationService.generatePDF();
         await eventRegistrationService.sendEmail();
       } catch (error) {
-        // Log the error, or handle it as required
         res.status(500).json({ message: false, error: error });
       }
     })();
-
-    // res.json(user.paymentData.data.transactionId);
   } catch (error) {
     if (error.response) {
       res.status(error.response.status).json({
-        message: error,
+        message: error.message,
         data: error.response.data,
       });
     } else {
-      res.status(500).json({ message: false, error: error });
+      res.status(500).json({ message: false, error: error.message });
     }
   }
 };

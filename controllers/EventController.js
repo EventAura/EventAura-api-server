@@ -57,7 +57,7 @@ const EventPostController = async (req, res) => {
 
 const EventGetController = async (req, res) => {
   try {
-    const response = await EventModel.find();
+    const response = await EventModel.find().sort({ eventCreatedDate: -1 });
     res.status(200).json({ message: true, data: response });
   } catch (error) {
     res.status(500).json({ message: false });
