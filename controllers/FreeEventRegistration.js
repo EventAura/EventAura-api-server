@@ -22,11 +22,11 @@ const FreeEventRegistration = async (req, res) => {
       eventPrice: event.eventPrice,
     });
 
-    res.status(201).json({ message: true, id: user._id });
     const eventRegistrationService = new EventRegistrationService(user, event);
     await eventRegistrationService.generateQRCode();
     await eventRegistrationService.generatePDF();
     await eventRegistrationService.sendEmail();
+    res.json({ message: true, id: user._id });
   } catch (error) {
     res.status(500).json({ message: false, error: error.message });
   }

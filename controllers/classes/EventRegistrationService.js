@@ -166,11 +166,25 @@ class EventRegistrationService {
   async sendEmail() {
     try {
       const transporter = nodemailer.createTransport({
-        service: "Gmail",
+        host: "smtp.office365.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
         auth: {
           user: process.env.EMAIL,
           pass: process.env.PASSWORD,
         },
+        tls: {
+          rejectUnauthorized: true,
+        },
+        logger: true, // Log information
+      });
+
+      transporter.verify((error, success) => {
+        if (error) {
+          console.error("Error verifying transporter:", error);
+        } else {
+          console.log("Server is ready to take our messages:", success);
+        }
       });
 
       const mailOptions = {
@@ -322,7 +336,7 @@ class EventRegistrationService {
         fs.unlinkSync(this.pdfPath);
       }
     } catch (error) {
-      throw new Error("Failed to send email: " + error.message);
+      throw new Error("Failed to send email: " + error);
     }
   }
 }
