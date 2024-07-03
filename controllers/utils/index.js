@@ -71,19 +71,9 @@ const htmlforEventManager = `<!DOCTYPE html>
           <strong>{{eventHostedBy}}</strong>, has been successfully created on
           the EventAura servers. Please review the details below:
         </p>
-        <ul>
-          <li><strong>Payment Details:</strong>{{eventPaymentDetails}} (To change the payments details, contact Us ) </li>
-          <li><strong>Admin Pannel Username</strong>Admin</li>
-          <li><strong>Admin Panel Password:</strong>{{eventAdminPassword}}</li> (This is a secure password, please do not share with anyone)
-          <li><strong>Last Date to access Admin Pannel:</strong> {{eventDate}}</li>
-        </ul>
         <p>
           Please ensure that all the details are correct. If you need to make
-          any changes, please contact the help desk.
-        </p>
-        <p>
-          Note that access to the admin panel will be restricted after the event
-          date.
+          any changes, please contact Us.
         </p>
         <p>
           Here is the link to the successful event creation:
@@ -95,7 +85,7 @@ const htmlforEventManager = `<!DOCTYPE html>
         <p>
           Here is the link to the admin panel:
           <a
-            href="https://tesrct-admin-pannel.vercel.app/secure/v3/dasboard/login/{{Adminid}}"
+            href="https://eventaura-admin-pannel.vercel.app/secure/v3/dasboard/login/{{Adminid}}"
             >Admin Panel</a
           >
         </p>
