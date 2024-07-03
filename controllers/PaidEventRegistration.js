@@ -90,7 +90,6 @@ const PaidEventStatus = async (req, res) => {
   const key = process.env.KEY; // Production key
   const keyIndex = process.env.KEY_INDEX || 1; // Production key index
   const merchantId = process.env.MERCHAND_ID; // Production Merchant ID
-  console.log(merchantTransactionId, eventId, key, keyIndex, merchantId);
   try {
     // Construct the string to hash
     const stringToHash =
