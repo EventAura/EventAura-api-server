@@ -132,7 +132,7 @@ const PaidEventStatus = async (req, res) => {
 
     user.paymentData = response.data;
     await user.save();
-    res.redirect(`https://tesract.vercel.app/event/${user._id}/success`);
+    res.redirect(`https://eventaura.tech/event/${user._id}/success`);
 
     // Additional processing (optional)
     (async () => {

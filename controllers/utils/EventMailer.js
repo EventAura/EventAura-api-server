@@ -14,16 +14,12 @@ class EventMailer {
 
   async sendEmail() {
     try {
-      let transporter = nodemailer.createTransport({
-        host: "smtp.office365.com",
-        port: 587,
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
         secure: false, // true for 465, false for other ports
         auth: {
           user: process.env.EMAIL,
           pass: process.env.PASSWORD,
-        },
-        tls: {
-          ciphers: "SSLv3",
         },
       });
       const formattedPlaceholder = htmlforEventManager

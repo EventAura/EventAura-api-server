@@ -62,17 +62,17 @@ const htmlforEventManager = `<!DOCTYPE html>
   <body>
     <div class="container">
       <div class="banner">
-        <h1>Teseract</h1>
+        <h1>EventAura</h1>
       </div>
       <div class="content">
         <p>Dear Event Manager,</p>
         <p>
           Your event, <strong>{{eventName}}</strong>, hosted by
           <strong>{{eventHostedBy}}</strong>, has been successfully created on
-          the Teseract servers. Please review the details below:
+          the EventAura servers. Please review the details below:
         </p>
         <ul>
-          <li><strong>Payment Details:</strong>{{eventPaymentDetails}} (To change the payemtn details reach the helpdesk) </li>
+          <li><strong>Payment Details:</strong>{{eventPaymentDetails}} (To change the payments details, contact Us ) </li>
           <li><strong>Admin Pannel Username</strong>Admin</li>
           <li><strong>Admin Panel Password:</strong>{{eventAdminPassword}}</li> (This is a secure password, please do not share with anyone)
           <li><strong>Last Date to access Admin Pannel:</strong> {{eventDate}}</li>
@@ -88,7 +88,7 @@ const htmlforEventManager = `<!DOCTYPE html>
         <p>
           Here is the link to the successful event creation:
           <a
-            href="https://tesract.vercel.app//secure/v3/Event-On-Boarding/success/{{id}}"
+            href="https://eventaura.tech/secure/v3/Event-On-Boarding/success/{{id}}"
             >Successful Event Creation</a
           >
         </p>
@@ -101,11 +101,11 @@ const htmlforEventManager = `<!DOCTYPE html>
         </p>
         <p>
           For the event page, please visit:
-          <a href="https://tesract.vercel.app/event/{{Eventid}}">Event Page</a>
+          <a href="https://eventaura.tech/event/{{Eventid}}">Event Page</a>
         </p>
         <p>
-          If you need help, please contact us at +91 9030684781 or email us at
-          <a href="mailto:vedasolutionshyderabad@gmail.com">vedasolutionshyderabad@gmail.com</a>.
+          If you need help, please contact us at +91 9030684781 , +91 9182663484 or email us at
+          <a href="mailto:support@eventaura.tech">support@eventaura.tech</a>.
         </p>
         <p><em>This is a system-generated email. Please do not reply.</em></p>
       </div>
