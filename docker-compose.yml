@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  eventaura_web_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: varunharinath/tesract_server:1.0.0.0.RELEASE
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./utils/.env
+    environment:
+      - NODE_ENV=production
