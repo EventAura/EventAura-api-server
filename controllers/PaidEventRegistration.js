@@ -145,7 +145,9 @@ const PaidEventStatus = async (req, res) => {
         await eventRegistrationService.generatePDF();
         await eventRegistrationService.sendEmail();
       } catch (error) {
-        res.status(500).json({ message: false, error: error });
+        if (!res.headersSent) {
+          return res.status(500).json({ message: false, error: error.message });
+        }
       }
     })();
   } catch (error) {
