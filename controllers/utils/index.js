@@ -85,7 +85,7 @@ const htmlforEventManager = `<!DOCTYPE html>
         <p>
           Here is the link to the admin panel:
           <a
-            href="https://eventaura-admin-pannel.vercel.app/secure/v3/dasboard/login/{{Adminid}}"
+            href="https://admin.eventaura.tech/secure/v3/dasboard/login/{{Adminid}}"
             >Admin Panel</a
           >
         </p>
@@ -94,7 +94,7 @@ const htmlforEventManager = `<!DOCTYPE html>
           <a href="https://eventaura.tech/event/{{Eventid}}">Event Page</a>
         </p>
         <p>
-          If you need help, please contact us at +91 9030684781 , +91 9182663484 or email us at
+          If you need help, please contact us at +91 9182663484 or email us at
           <a href="mailto:support@eventaura.tech">support@eventaura.tech</a>.
         </p>
         <p><em>This is a system-generated email. Please do not reply.</em></p>
