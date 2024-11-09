@@ -35,18 +35,13 @@ class EventRegistrationService {
       const page = await browser.newPage();
 
       let transactionIdContent = "-NA-";
-      if (
-        this.user.paymentData &&
-        this.user.paymentData.data &&
-        this.user.paymentData.data.transactionId
-      ) {
+      if (this.user.paymentData?.data?.transactionId) {
         transactionIdContent = ` ${this.user.paymentData.data.transactionId}`;
       }
-
-      let priceContent = "FREE";
-      if (this.user.eventPrice && this.user.eventPrice !== "0") {
-        priceContent = ` ${this.user.eventPrice}`;
-      }
+      let priceContent =
+        this.user.eventPrice && this.user.eventPrice !== "0"
+          ? ` ${this.user.eventPrice}`
+          : "FREE";
 
       const content = `
       <!DOCTYPE html>
@@ -150,11 +145,12 @@ class EventRegistrationService {
       </html>
       
       `;
+      const pdfDirectory = path.join(__dirname, "../../public/pdf");
+      if (!fs.existsSync(pdfDirectory))
+        fs.mkdirSync(pdfDirectory, { recursive: true });
+
+      const pdfPath = path.join(pdfDirectory, `${this.user._id}.pdf`);
       await page.setContent(content);
-      const pdfPath = path.join(
-        __dirname,
-        `../../public/pdf/${this.user._id}.pdf`
-      );
       await page.pdf({ path: pdfPath, format: "A4" });
       await browser.close();
       this.pdfPath = pdfPath;
@@ -165,6 +161,8 @@ class EventRegistrationService {
 
   async sendEmail() {
     try {
+      if (!fs.existsSync(this.pdfPath))
+        throw new Error("PDF file not found for sending email.");
       const transporter = nodemailer.createTransport({
         service: "gmail",
         secure: false, // true for 465, false for other ports
@@ -309,12 +307,7 @@ class EventRegistrationService {
 
         
         `,
-        attachments: [
-          {
-            filename: `${this.user._id}.pdf`,
-            path: this.pdfPath,
-          },
-        ],
+        attachments: [{ filename: `${this.user._id}.pdf`, path: this.pdfPath }],
       };
 
       await transporter.sendMail(mailOptions);
@@ -323,7 +316,7 @@ class EventRegistrationService {
         fs.unlinkSync(this.pdfPath);
       }
     } catch (error) {
-      throw new Error("Failed to send email: " + error);
+      throw new Error("Failed to send email: " + error.message);
     }
   }
 }
