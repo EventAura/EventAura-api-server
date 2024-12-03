@@ -25,6 +25,22 @@ class EventRegistrationService {
       throw new Error("Failed to generate QR code: " + error.message);
     }
   }
+  // async generateQRCode() {
+  //   try {
+  //     // Construct the event onboarding URL with the user ID and event ID as parameters
+  //     const eventOnboardingUrl = `https://eventaura-admin-pannel.vercel.app/secure/v3/dasboard/overview/${this.event._id.toString()}?userId=${this.user._id.toString()}`;
+
+  //     // Generate the QR code with the event onboarding URL
+  //     const qrCodeData = await QRCode.toDataURL(eventOnboardingUrl);
+
+  //     // Update the user's document with the generated QR code
+  //     await User.findByIdAndUpdate(this.user._id, { qrCode: qrCodeData });
+  //     this.user.qrCode = qrCodeData;
+  //   } catch (error) {
+  //     throw new Error("Failed to generate QR code: " + error.message);
+  //   }
+  // }
+
 
   async generatePDF() {
     try {

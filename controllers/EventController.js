@@ -48,6 +48,7 @@ const EventPostController = async (req, res) => {
     );
     await eventMailer.sendEmail();
     res.status(201).json({ message: true, data: response });
+    // console.log(response);
   } catch (error) {
     res.status(500).json({ message: false });
   }
@@ -59,6 +60,7 @@ const EventGetController = async (req, res) => {
   try {
     const response = await EventModel.find().sort({ eventCreatedDate: -1 });
     res.status(200).json({ message: true, data: response });
+    // console.log(response);
   } catch (error) {
     res.status(500).json({ message: false });
   }
@@ -69,6 +71,7 @@ const EventGetController = async (req, res) => {
 const EventGetSingleController = async (req, res) => {
   try {
     const response = await EventModel.findById(req.params.id);
+    // console.log(response);
     res.status(200).json({ message: true, data: response });
   } catch (error) {
     res.status(500).json({ message: false });
