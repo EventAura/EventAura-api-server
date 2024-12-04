@@ -9,7 +9,7 @@ dotenv.config();
 
 const PaidEventRegistration = async (req, res) => {
   try {
-    const { name, email, phoneNumber, rollNumber, college ,eventAmount} = req.body;
+    const { name, email, phoneNumber, rollNumber, college } = req.body;
     const { id } = req.params;
 
     const event = await EventModel.findById(id);
@@ -21,7 +21,7 @@ const PaidEventRegistration = async (req, res) => {
     const key = process.env.KEY;
     const keyIndex = process.env.KEY_INDEX || 1;
     const merchantId = process.env.MERCHAND_ID;
-    const amount = eventAmount
+    const amount = event.eventPrice;
 
     const user = await User.create({
       name,
@@ -30,7 +30,7 @@ const PaidEventRegistration = async (req, res) => {
       rollNumber,
       college,
       eventName: event.eventName,
-      eventPrice: amount,
+      eventPrice: event.eventPrice,
       merchantTransactionId,
     });
 

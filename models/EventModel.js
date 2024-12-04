@@ -21,7 +21,7 @@ const EventSchema = new mongoose.Schema({
     required: true,
   },
   eventPrice: {
-    type: [String],
+    type: String,
     required: true,
   },
   eventLastDate: {
