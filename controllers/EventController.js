@@ -103,34 +103,9 @@ const EventLoginController = async (req, res) => {
   }
 };
 
-// Events Patch (update event) Controller
-const EventPatchController = async (req, res) => {
-  try {
-    const { id } = req.params; // Get the event ID from the route parameters
-    const updates = req.body; // Get the fields to update from the request body
-
-    const updatedEvent = await EventModel.findByIdAndUpdate(
-      id,
-      updates,
-      { new: true, runValidators: true } // Return the updated document and validate the updates
-    );
-
-    if (!updatedEvent) {
-      return res.status(404).json({ message: false, error: "Event not found" });
-    }
-
-    res.status(200).json({ message: true, data: updatedEvent });
-  } catch (error) {
-    console.error(`Error updating event: ${error.message}`);
-    res.status(500).json({ message: false, error: error.message });
-  }
-};
-
-
 export {
   EventPostController,
   EventGetController,
   EventGetSingleController,
   EventLoginController,
-  EventPatchController,
 };
