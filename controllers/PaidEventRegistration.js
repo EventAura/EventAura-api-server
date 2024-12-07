@@ -135,6 +135,7 @@ const PaidEventStatus = async (req, res) => {
     res.redirect(`https://eventaura.tech/event/${user._id}/success`);
 
     // Additional processing (optional)
+    if( response.data.success == true ) {
     (async () => {
       try {
         const eventRegistrationService = new EventRegistrationService(
@@ -149,7 +150,9 @@ const PaidEventStatus = async (req, res) => {
           return res.status(500).json({ message: false, error: error.message });
         }
       }
+    
     })();
+  }
   } catch (error) {
     if (error.response) {
       res.status(error.response.status).json({
@@ -161,5 +164,6 @@ const PaidEventStatus = async (req, res) => {
     }
   }
 };
+
 
 export { PaidEventRegistration, PaidEventStatus };
