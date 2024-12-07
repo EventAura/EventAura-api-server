@@ -31,4 +31,38 @@ const getParticipantsByEvent = async (req, res) => {
   }
 };
 
-export { getParticipants, getParticipantById, getParticipantsByEvent };
+const getUserEntryStatus = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ userEntryStatus: user.userEntryStatus, user: user });
+    
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log(error);
+  }
+};
+
+const updateUserEntryStatus = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.userEntryStatus = "true";
+    await user.save();
+    res.status(200).json({ message: "User entry status updated to true" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export {
+  getParticipants,
+  getParticipantById,
+  getParticipantsByEvent,
+  getUserEntryStatus,
+  updateUserEntryStatus,
+};
