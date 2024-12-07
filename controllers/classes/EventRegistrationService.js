@@ -273,7 +273,7 @@ class EventRegistrationService {
       <div class="content">
         <p>Dear ${this.user.name},</p>
         <p>
-          Thank you for participating in the event
+          Thank you for registering for the event
           <strong>${this.event.eventName}</strong> hosted by
           <strong>${this.event.eventHostedBy}</strong> at
           <strong>${this.event.eventVenue}</strong>. We're delighted to have you
