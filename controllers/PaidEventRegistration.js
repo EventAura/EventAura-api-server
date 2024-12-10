@@ -135,7 +135,7 @@ const PaidEventStatus = async (req, res) => {
     res.redirect(`https://eventaura.tech/event/${user._id}/success`);
 
     // Additional processing (optional)
-    if (response.data.success) {
+    if (response.data.data.responseCode === "SUCCESS") {
       (async () => {
         try {
           const eventRegistrationService = new EventRegistrationService(
