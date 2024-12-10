@@ -4,7 +4,7 @@ import {
   EventGetController,
   EventGetSingleController,
   EventLoginController,
-  EventPatchController
+  EventPatchController,
 } from "../controllers/EventController.js";
 
 const eventRouter = express.Router();

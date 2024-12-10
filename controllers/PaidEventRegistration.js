@@ -135,21 +135,25 @@ const PaidEventStatus = async (req, res) => {
     res.redirect(`https://eventaura.tech/event/${user._id}/success`);
 
     // Additional processing (optional)
-    (async () => {
-      try {
-        const eventRegistrationService = new EventRegistrationService(
-          user,
-          event
-        );
-        await eventRegistrationService.generateQRCode();
-        await eventRegistrationService.generatePDF();
-        await eventRegistrationService.sendEmail();
-      } catch (error) {
-        if (!res.headersSent) {
-          return res.status(500).json({ message: false, error: error.message });
+    if (response.data.data.responseCode === "SUCCESS") {
+      (async () => {
+        try {
+          const eventRegistrationService = new EventRegistrationService(
+            user,
+            event
+          );
+          await eventRegistrationService.generateQRCode();
+          await eventRegistrationService.generatePDF();
+          await eventRegistrationService.sendEmail();
+        } catch (error) {
+          if (!res.headersSent) {
+            return res
+              .status(500)
+              .json({ message: false, error: error.message });
+          }
         }
-      }
-    })();
+      })();
+    }
   } catch (error) {
     if (error.response) {
       res.status(error.response.status).json({
@@ -161,6 +165,5 @@ const PaidEventStatus = async (req, res) => {
     }
   }
 };
-
 
 export { PaidEventRegistration, PaidEventStatus };

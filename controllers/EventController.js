@@ -102,7 +102,6 @@ const EventLoginController = async (req, res) => {
     res.status(500).json({ message: false, error: error.message });
   }
 };
-
 // Events Patch (update event) Controller
 const EventPatchController = async (req, res) => {
   try {
@@ -125,7 +124,6 @@ const EventPatchController = async (req, res) => {
     res.status(500).json({ message: false, error: error.message });
   }
 };
-
 
 export {
   EventPostController,
