@@ -64,7 +64,15 @@ const EventSchema = new mongoose.Schema({
   eventMailDescription:{
     type: String,
     required: true,
+  },
+  eventRegistrationLimit: {
+    type: Number,
+    
+  },
+  eventRate:{
+    type: Number,
   }
+  
 });
 
 const EventModel = mongoose.model("Events", EventSchema);
