@@ -43,7 +43,9 @@ app.use("/", ParticipantRouter);
 cron.schedule("*/10 * * * *", async () => {
   try {
     console.log("Pinging server...");
-    const response = await axios.get("https://tesract-server.onrender.com");
+    const response = await axios.get(
+      "https://eventaura-server-api.onrender.com"
+    );
     console.log("Ping successful:", response.data);
   } catch (error) {
     console.error("Ping failed:", error.message);

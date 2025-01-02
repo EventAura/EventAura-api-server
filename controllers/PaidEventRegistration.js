@@ -39,7 +39,7 @@ const PaidEventRegistration = async (req, res) => {
       merchantTransactionId,
       merchantUserId: merchantId,
       amount: parseInt(amount) * 100,
-      redirectUrl: `https://tesract-server.onrender.com/api/phone-pay/status/${merchantId}/${merchantTransactionId}/${event._id}`,
+      redirectUrl: `https://eventaura-server-api.onrender.com/api/phone-pay/status/${merchantId}/${merchantTransactionId}/${event._id}`,
       redirectMode: "POST",
       mobileNumber: phoneNumber,
       paymentInstrument: {
