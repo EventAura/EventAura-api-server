@@ -56,6 +56,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  extraQuestions: {
+    type: mongoose.Schema.Types.Mixed,
+    default: null,
+  },
 });
 
 const User = mongoose.model("Participants", UserSchema);

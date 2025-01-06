@@ -9,7 +9,7 @@ dotenv.config();
 
 const PaidEventRegistration = async (req, res) => {
   try {
-    const { name, email, phoneNumber, rollNumber, college } = req.body;
+    const { name, email, phoneNumber, rollNumber, college, extraQuestions } = req.body;
     const { id } = req.params;
 
     const event = await EventModel.findById(id);
@@ -32,6 +32,7 @@ const PaidEventRegistration = async (req, res) => {
       eventName: event.eventName,
       eventPrice: event.eventPrice,
       merchantTransactionId,
+      extraQuestions,
     });
 
     const data = {
