@@ -28,7 +28,7 @@ import Organiser from "../models/Organisers.js";
 // Controller for handling Clerk webhooks
 export const handleClerkWebhook = async (req, res) => {
   const svix = new Webhook();
-  const secret = process.env.CLERK_WEBHOOK_SECRET; // Your Clerk webhook secret
+  const secret = process.env.WEBHOOK_SECRET; // Your Clerk webhook secret
 
   try {
     // Verify and decode the webhook payload

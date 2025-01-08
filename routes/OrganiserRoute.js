@@ -1,11 +1,8 @@
-import { createOrganiser } from "../controllers/OrganiserController.js";
+import { handleClerkWebhook } from "../controllers/OrganiserController.js";
 import express from "express";
 
 const OrganiserRouter = express.Router();
 
-OrganiserRouter.post("/create", createOrganiser);
+OrganiserRouter.post("/create", handleClerkWebhook);
 
 export default OrganiserRouter;
-
-
-
