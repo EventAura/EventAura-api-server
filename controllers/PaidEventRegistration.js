@@ -9,7 +9,8 @@ dotenv.config();
 
 const PaidEventRegistration = async (req, res) => {
   try {
-    const { name, email, phoneNumber, rollNumber, college, extraQuestions } = req.body;
+    const { name, email, phoneNumber, rollNumber, college, extraQuestions } =
+      req.body;
     const { id } = req.params;
 
     const event = await EventModel.findById(id);
@@ -40,7 +41,7 @@ const PaidEventRegistration = async (req, res) => {
       merchantTransactionId,
       merchantUserId: merchantId,
       amount: parseInt(amount) * 100,
-      redirectUrl: `https://eventaura-server-api.onrender.com/api/phone-pay/status/${merchantId}/${merchantTransactionId}/${event._id}`,
+      redirectUrl: `https://api.eventaura.tech/api/phone-pay/status/${merchantId}/${merchantTransactionId}/${event._id}`,
       redirectMode: "POST",
       mobileNumber: phoneNumber,
       paymentInstrument: {
