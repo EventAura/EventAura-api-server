@@ -3,75 +3,6 @@ import EventMailer from "./utils/EventMailer.js";
 import bcrypt from "bcryptjs";
 
 // Events Post Controller
-// const EventPostController = async (req, res) => {
-//   try {
-//     const {
-//       eventName,
-//       eventDescription,
-//       eventVenue,
-//       eventVenueUrl,
-//       eventDate,
-//       eventLastDate,
-//       eventManagerMail,
-//       eventManagerPhone,
-//       // eventAdminPassword,
-//       eventPaymentUpi,
-//       eventHostedBy,
-//       eventSpeaker,
-//       eventPrice,
-//       eventMailDescription,
-//       eventRegistrationLimit,
-//       eventQuestions,
-//       clerkId
-//     } = req.body;
-//     console.log(req.body);
-
-//       let response;
-//       try{
-//         const response = await EventModel.create({
-//           eventName,
-//           eventDescription,
-//           eventVenue,
-//           eventVenueUrl,
-//           eventDate,
-//           eventLastDate,
-//           eventManagerMail,
-//           eventManagerPhone,
-//           // eventAdminPassword,
-//           eventPaymentUpi,
-//           eventHostedBy,
-//           eventSpeaker,
-//           eventPrice,
-//           eventMailDescription,
-//           eventRegistrationLimit,
-//           eventQuestions,
-//           clerkId
-//         });
-
-//       } catch(err){
-//         console.log(err);
-//       }
-
-     
-//     const eventMailer = new EventMailer(
-//       response._id,
-//       eventName,
-//       eventManagerMail,
-//       eventHostedBy,
-//       eventPaymentUpi,
-//       // eventAdminPassword,
-//       eventDate
-//     );
-//     await eventMailer.sendEmail();
-//     // res.status(201).json({ message: true, data: response });
-//     res.json({ message: true, data: response });
-//   } catch (error) {
-//     res.status(500).json({ message: false });
-//   }
-// };
-
-
-
 const EventPostController = async (req, res) => {
   try {
     const {
@@ -83,70 +14,46 @@ const EventPostController = async (req, res) => {
       eventLastDate,
       eventManagerMail,
       eventManagerPhone,
+      eventAdminPassword,
       eventPaymentUpi,
       eventHostedBy,
       eventSpeaker,
       eventPrice,
       eventMailDescription,
-      eventRegistrationLimit,
-      eventQuestions,
-      clerkId,
+      eventRegistrationLimit
     } = req.body;
-
-    console.log(req.body);
-
-    let response; // Declare response outside the try block
-    try {
-      response = await EventModel.create({
-        eventName,
-        eventDescription,
-        eventVenue,
-        eventVenueUrl,
-        eventDate,
-        eventLastDate,
-        eventManagerMail,
-        eventManagerPhone,
-        eventPaymentUpi,
-        eventHostedBy,
-        eventSpeaker,
-        eventPrice,
-        eventMailDescription,
-        eventRegistrationLimit,
-        eventQuestions,
-        clerkId,
-      });
-    } catch (err) {
-      console.error("Error saving event to database:", err.message);
-      return res.status(500).json({ message: false, error: "Database error" });
-    }
-
+    const response = await EventModel.create({
+      eventName,
+      eventDescription,
+      eventVenue,
+      eventVenueUrl,
+      eventDate,
+      eventLastDate,
+      eventManagerMail,
+      eventManagerPhone,
+      eventAdminPassword,
+      eventPaymentUpi,
+      eventHostedBy,
+      eventSpeaker,
+      eventPrice,
+      eventMailDescription,
+      eventRegistrationLimit
+    });
     const eventMailer = new EventMailer(
       response._id,
       eventName,
       eventManagerMail,
       eventHostedBy,
       eventPaymentUpi,
-      123456,
+      eventAdminPassword,
       eventDate
     );
-
-    try {
-      await eventMailer.sendEmail();
-    } catch (err) {
-      console.error("Error sending email:", err.message);
-      return res.status(500).json({ message: false, error: "Email sending error" });
-    }
-
+    await eventMailer.sendEmail();
     res.status(201).json({ message: true, data: response });
   } catch (error) {
-    console.error("Unexpected error:", error.message);
-    res.status(500).json({ message: false, error: "Internal server error" });
+    res.status(500).json({ message: false });
   }
 };
-
-
-
-
 
 // Events Get (all events) Controller
 
@@ -158,26 +65,6 @@ const EventGetController = async (req, res) => {
     res.status(500).json({ message: false });
   }
 };
-
-const EventGetClerkController = async (req, res) => {
-  const { clerkId } = req.params; // Extract clerkId from route parameters
-  console.log("Clerk ID:", clerkId);
-
-  try {
-    // Pass an object to the `find()` method to filter by clerkId
-    const events = await EventModel.find({ clerkId }); 
-    if (events.length === 0) {
-      return res.status(404).json({ success: false, message: "No events found for this clerkId" });
-    }
-    res.status(200).json({ success: true, data: events });
-  } catch (error) {
-    console.error("Error fetching events:", error.message);
-    res.status(500).json({ success: false, message: "Failed to fetch events" });
-  }
-};
-
-
-
 
 // Events Get (single event) Controller
 
@@ -217,26 +104,6 @@ const EventLoginController = async (req, res) => {
     res.status(500).json({ message: false, error: error.message });
   }
 };
-
-const EventGetClerkSingleController = async (req, res) => {
-  try {
-    const { clerkId, eventId } = req.params;
-    const event = await EventModel.findOne({ clerkId, _id: eventId });
-
-    if (!event) {
-      return res.status(404).json({ message: false, error: "Event not found" });
-    }
-
-    res.status(200).json({ message: true, data: event });
-  } catch (error) {
-    console.error(`Error fetching event: ${error.message}`);
-    res.status(500).json({ message: false, error: error.message });
-  }
-};
-
-
-
-
 // Events Patch (update event) Controller
 const EventPatchController = async (req, res) => {
   try {
@@ -266,6 +133,4 @@ export {
   EventGetSingleController,
   EventLoginController,
   EventPatchController,
-  EventGetClerkController,
-  EventGetClerkSingleController,
 };

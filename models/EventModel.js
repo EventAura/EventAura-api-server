@@ -48,7 +48,7 @@ const EventSchema = new mongoose.Schema({
   },
   eventAdminPassword: {
     type: String,
-    // required: true,
+    required: true,
   },
   eventPaymentUpi: {
     type: String,
@@ -71,16 +71,7 @@ const EventSchema = new mongoose.Schema({
   },
   eventRate:{
     type: Number,
-  },
-  clerkId: {
-    type: String,
-    required: true,
-  },
-  eventQuestions: {
-    type: mongoose.Schema.Types.Mixed,
-    default: null,
-    
-  },
+  }
   
 });
 
