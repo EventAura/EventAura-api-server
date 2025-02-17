@@ -31,6 +31,24 @@ const getParticipantsByEvent = async (req, res) => {
   }
 };
 
+//get participants  eventId
+const getParticipantsByClerkEvent = async (req, res) => {
+  try {
+    console.log(req.params.eventId);
+    const  eventId  =  await EventModel.findById(req.params.eventId);
+    const users = await User.find({ eventName: eventId.eventName }).sort({
+      userRegistrationDate: -1,
+    });
+    res.status(200).json(users);
+    
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+
+
 const getUserEntryStatus = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -44,6 +62,7 @@ const getUserEntryStatus = async (req, res) => {
     console.log(error);
   }
 };
+
 
 const updateUserEntryStatus = async (req, res) => {
   try {
@@ -65,4 +84,5 @@ export {
   getParticipantsByEvent,
   getUserEntryStatus,
   updateUserEntryStatus,
+  getParticipantsByClerkEvent
 };
