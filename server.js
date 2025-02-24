@@ -62,7 +62,8 @@ app.use("/api/v1", hackathonRouter);
 //   }
 // });
 const PORT = process.env.PORT || 8080;
+const HOST = process.env.HOST || "127.0.0.1"; // Default to localhost for local dev
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
 });
