@@ -48,17 +48,19 @@ app.use("/", ParticipantRouter);
 // Hackathon Router
 app.use("/api/v1", hackathonRouter);
 
-cron.schedule("*/10 * * * *", async () => {
-  try {
-    console.log("Pinging server...");
-    const response = await axios.get(
-      "https://eventaura-server-api.onrender.com"
-    );
-    console.log("Ping successful:", response.data);
-  } catch (error) {
-    console.error("Ping failed:", error.message);
-  }
-});
+//not needed in development branch
+
+// cron.schedule("*/10 * * * *", async () => {
+//   try {
+//     console.log("Pinging server...");
+//     const response = await axios.get(
+//       "https://eventaura-server-api.onrender.com"
+//     );
+//     console.log("Ping successful:", response.data);
+//   } catch (error) {
+//     console.error("Ping failed:", error.message);
+//   }
+// });
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
