@@ -11,6 +11,7 @@ import ParticipantRouter from "./routes/ParticipantRoute.js";
 import paidEventRouter from "./routes/PaidEventRoute.js";
 import OrganiserRouter from "./routes/OrganiserRoute.js";
 import hackathonRouter from "./routes/HackathonRouter.js";
+import HackathonRegistrationRoute from "./routes/HackathonRegistrationRoute.js";
 // env file configuration
 dotenv.config({ path: "./utils/.env" });
 
@@ -48,13 +49,16 @@ app.use("/", ParticipantRouter);
 // Hackathon Router
 app.use("/api/v1", hackathonRouter);
 
+// Hackathon Registration Route
+app.use("/api/v1", HackathonRegistrationRoute);
+
 //not needed in development branch
 
 // cron.schedule("*/10 * * * *", async () => {
 //   try {
 //     console.log("Pinging server...");
 //     const response = await axios.get(
-//       "https://eventaura-server-api.onrender.com"
+//       "https:/"
 //     );
 //     console.log("Ping successful:", response.data);
 //   } catch (error) {
