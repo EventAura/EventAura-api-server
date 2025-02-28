@@ -3,7 +3,7 @@ import puppeteer from "puppeteer";
 import nodemailer from "nodemailer";
 import fs from "fs";
 import path from "path";
-import team from "../../models/team.js";
+// import team from "../../models/team.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
