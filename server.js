@@ -54,7 +54,7 @@ app.use("/api/v1", hackathonRouter);
 //   try {
 //     console.log("Pinging server...");
 //     const response = await axios.get(
-//       "https://eventaura-server-api.onrender.com"
+//       "https:/"
 //     );
 //     console.log("Ping successful:", response.data);
 //   } catch (error) {
